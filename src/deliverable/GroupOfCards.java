@@ -1,54 +1,34 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
- */
+
 package deliverable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * A concrete class that represents any grouping of cards for a Game. HINT, you might want to subclass this more than
- * once. The group of cards has a maximum size attribute which is flexible for reuse.
- *
- * @author dancye
- * @author Paul Bonenfant Jan 2020
- */
+
 public class GroupOfCards {
+    
+   private ArrayList<Card> cards = new ArrayList<>();
 
-    //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
-    private int size;//the size of the grouping
+    public GroupOfCards() {
+        
+        String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
-    public GroupOfCards(int size) {
-        this.size = size;
-    }
-
-    /**
-     * A method that will get the group of cards as an ArrayList
-     *
-     * @return the group of cards.
-     */
-    public ArrayList<Card> getCards() {
-        return cards;
+        for (String suit : suits) {
+            for (String rank : ranks) {
+                cards.add(new TeenPattiCard(suit, rank));
+            }
+        }
     }
 
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    /**
-     * @return the size of the group of cards
-     */
-    public int getSize() {
-        return size;
+    public Card dealCard() {
+        return cards.remove(0);
     }
 
-    /**
-     * @param size the max size for the group of cards
-     */
-    public void setSize(int size) {
-        this.size = size;
+    public int size() {
+        return cards.size();
     }
-
-}//end class
+}
